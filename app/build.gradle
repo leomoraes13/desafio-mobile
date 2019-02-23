@@ -50,4 +50,8 @@ dependencies {
 
     // LiveData
     implementation "android.arch.lifecycle:extensions:$arch_version"
+
+    // Ui Libraries
+    implementation "com.afollestad.material-dialogs:core:0.9.6.0"
+    implementation "com.github.thomper:sweet-alert-dialog:v1.4.0"
 }

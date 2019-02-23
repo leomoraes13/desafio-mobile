@@ -18,11 +18,11 @@ public class MainViewModel extends AndroidViewModel {
 
     // List of products
     private final LiveData<List<Product>> productsLiveData =
-            Transformations.switchMap(queryLiveData, (query) -> MainRepository.getInstance().getProducts(query));
+            Transformations.switchMap(queryLiveData, (query) -> MainRepository.getInstance().getProducts(0, 10, query));
 
     public MainViewModel(@NonNull Application application) {
         super(application);
-        this.setQuery("Inicial");
+        this.setQuery("");
     }
 
     public LiveData<List<Product>> getProducts() {

@@ -3,12 +3,14 @@ package ca.leomoraes.fulllabstore.repository;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+import ca.leomoraes.fulllabstore.api.ApiService;
 import ca.leomoraes.fulllabstore.model.Product;
+import ca.leomoraes.fulllabstore.model.ProductResponse;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainRepository {
 
@@ -22,32 +24,31 @@ public class MainRepository {
     public MainRepository() {
     }
 
-    public LiveData<List<Product>> getProducts(String query) {
+    public LiveData<List<Product>> getProducts(int page, int size, String query) {
         final MutableLiveData<List<Product>> data = new MutableLiveData<>();
 
-        ExecutorService exec = Executors.newSingleThreadExecutor();
-        exec.execute(() -> {
-            simulateDelay();
-
-            List<Product> list = new ArrayList<>();
-            list.add(new Product(query + " 1", "Brand 1"));
-            list.add(new Product(query + " 2", "Brand 2"));
-            list.add(new Product(query + " 3", "Brand 3"));
-            list.add(new Product(query + " 4", "Brand 4"));
-
-            data.postValue( list );
-        });
-
+        ApiService
+            .getInstance()
+            .getProducts(
+                page,
+                size,
+                query,
+                new Callback<ProductResponse>() {
+                    @Override
+                    public void onResponse(Call<ProductResponse> call, Response<ProductResponse> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+                            data.postValue(response.body().getProducts());
+                        }else{
+                            data.postValue(null);
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<ProductResponse> call, Throwable t) {
+                        data.postValue(null);
+                    }
+                }
+            );
 
         return data;
     }
-
-    private void simulateDelay() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
 }
