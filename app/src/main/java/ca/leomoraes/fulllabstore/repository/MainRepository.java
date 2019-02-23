@@ -22,17 +22,18 @@ public class MainRepository {
     public MainRepository() {
     }
 
-    public LiveData<List<Product>> getProducts() {
+    public LiveData<List<Product>> getProducts(String query) {
         final MutableLiveData<List<Product>> data = new MutableLiveData<>();
 
         ExecutorService exec = Executors.newSingleThreadExecutor();
         exec.execute(() -> {
             simulateDelay();
+
             List<Product> list = new ArrayList<>();
-            list.add(new Product("Name 1", "Brand 1"));
-            list.add(new Product("Name 2", "Brand 2"));
-            list.add(new Product("Name 3", "Brand 3"));
-            list.add(new Product("Name 4", "Brand 4"));
+            list.add(new Product(query + " 1", "Brand 1"));
+            list.add(new Product(query + " 2", "Brand 2"));
+            list.add(new Product(query + " 3", "Brand 3"));
+            list.add(new Product(query + " 4", "Brand 4"));
 
             data.postValue( list );
         });
