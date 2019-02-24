@@ -8,6 +8,7 @@ import android.support.annotation.StringRes;
 import android.support.v7.app.AppCompatActivity;
 
 import butterknife.ButterKnife;
+import ca.leomoraes.fulllabstore.R;
 import ca.leomoraes.fulllabstore.util.MessageHelper;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -20,6 +21,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         setContentView(getLayoutResId());
 
         messageHelper = new MessageHelper(this);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setIcon(R.mipmap.ic_launcher_round);
 
         ButterKnife.bind(this);
         setupViewModel();

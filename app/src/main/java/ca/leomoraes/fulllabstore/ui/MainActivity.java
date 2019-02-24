@@ -2,11 +2,11 @@ package ca.leomoraes.fulllabstore.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.support.v7.widget.CardView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,7 +23,7 @@ public class MainActivity extends BaseActivity {
     TextView textView;
 
     @BindView(R.id.main_searh_box)
-    LinearLayout searchBox;
+    CardView searchBox;
 
     @BindView(R.id.main_search_editText)
     EditText searchEdit;

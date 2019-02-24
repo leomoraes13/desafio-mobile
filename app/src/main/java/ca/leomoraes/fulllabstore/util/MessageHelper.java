@@ -16,7 +16,7 @@ public final class MessageHelper {
         this.context = context;
         loadingDialog = new SweetAlertDialog(context, SweetAlertDialog.PROGRESS_TYPE);
         loadingDialog.setCancelable(false);
-        loadingDialog.getProgressHelper().setBarColor(Color.parseColor("#7b1fa2"));
+        loadingDialog.getProgressHelper().setBarColor(Color.parseColor("#00bfa5"));
         loadingDialog.setTitleText("Carregando...");
     }
 
