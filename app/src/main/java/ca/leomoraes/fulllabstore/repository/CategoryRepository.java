@@ -2,7 +2,6 @@ package ca.leomoraes.fulllabstore.repository;
 
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
 import java.util.List;
 

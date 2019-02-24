@@ -3,8 +3,6 @@ package ca.leomoraes.fulllabstore.ui;
 import android.arch.lifecycle.ViewModelProviders;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.TextView;
 
 import java.util.List;
 

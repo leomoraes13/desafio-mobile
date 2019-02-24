@@ -63,9 +63,6 @@ public class MainActivity extends BaseActivity {
     }
 
     private void updateLayout(List<Product> products) {
-        // Exibir imagens, preço de tabela, preço final, melhor opção de parcelamento e desconto
-        // prod.getName() prod.getSkus().get(0).getSellers().get(0).getPrice()  prod.getSkus().get(0).getSellers().get(0).getListPrice()
-
         if(products!=null && !products.isEmpty()) {
             mAdapter.setProducts(products);
         }else{
