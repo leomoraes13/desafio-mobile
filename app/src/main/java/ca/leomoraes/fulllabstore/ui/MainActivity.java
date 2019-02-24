@@ -2,25 +2,28 @@ package ca.leomoraes.fulllabstore.ui;
 
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 import ca.leomoraes.fulllabstore.R;
+import ca.leomoraes.fulllabstore.adapter.ProductAdapter;
 import ca.leomoraes.fulllabstore.model.Product;
 import ca.leomoraes.fulllabstore.viewmodel.MainViewModel;
 
 public class MainActivity extends BaseActivity {
 
-    @BindView(R.id.main_text)
-    TextView textView;
+    @BindView(R.id.main_recycler)
+    RecyclerView mRecycler;
 
     @BindView(R.id.main_searh_box)
     CardView searchBox;
@@ -29,10 +32,24 @@ public class MainActivity extends BaseActivity {
     EditText searchEdit;
 
     private MainViewModel viewModel;
+    private ProductAdapter mAdapter;
 
     @Override
     int getLayoutResId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setupRecycler();
+    }
+
+    private void setupRecycler() {
+        GridLayoutManager layoutManager = new GridLayoutManager(this, 2, GridLayoutManager.VERTICAL, false);
+        mRecycler.setLayoutManager(layoutManager);
+        mAdapter = new ProductAdapter();
+        mRecycler.setAdapter(mAdapter);
     }
 
     @Override
@@ -47,12 +64,10 @@ public class MainActivity extends BaseActivity {
 
     private void updateLayout(List<Product> products) {
         // Exibir imagens, preço de tabela, preço final, melhor opção de parcelamento e desconto
+        // prod.getName() prod.getSkus().get(0).getSellers().get(0).getPrice()  prod.getSkus().get(0).getSellers().get(0).getListPrice()
 
-        textView.setText("");
         if(products!=null && !products.isEmpty()) {
-            for (Product prod : products) {
-                textView.append(prod.getName() + " - " + prod.getSkus().get(0).getSellers().get(0).getPrice() + " / " + prod.getSkus().get(0).getSellers().get(0).getListPrice() + "\n");
-            }
+            mAdapter.setProducts(products);
         }else{
             displayErrorMessage(R.string.erro_server, null);
         }

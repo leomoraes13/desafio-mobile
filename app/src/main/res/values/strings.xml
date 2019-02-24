@@ -3,4 +3,6 @@
     <string name="categorias">Categorias</string>
     <string name="erro_server">Erro ao acessar o servidor</string>
     <string name="busca">Busca</string>
+
+    <string name="button_details">Ver mais</string>
 </resources>

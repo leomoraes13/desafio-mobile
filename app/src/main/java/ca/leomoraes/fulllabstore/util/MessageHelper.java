@@ -5,8 +5,6 @@ import android.graphics.Color;
 
 import com.ontbee.legacyforks.cn.pedant.SweetAlert.SweetAlertDialog;
 
-import org.jetbrains.annotations.NotNull;
-
 public final class MessageHelper {
 
     private Activity context;
@@ -28,7 +26,7 @@ public final class MessageHelper {
         loadingDialog.dismiss();
     }
 
-    public void displayErrorMessage(@NotNull String message, MessageCallback callback) {
+    public void displayErrorMessage(String message, MessageCallback callback) {
         displayDialog("Ops...", message, callback, SweetAlertDialog.ERROR_TYPE);
     }
 

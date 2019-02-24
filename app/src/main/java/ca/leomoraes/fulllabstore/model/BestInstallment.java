@@ -2,7 +2,7 @@ package ca.leomoraes.fulllabstore.model;
 
 import com.google.gson.annotations.SerializedName;
 
-class BestInstallment {
+public class BestInstallment {
 
     @SerializedName("Count")
     private Integer count;
