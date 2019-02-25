@@ -2,7 +2,7 @@
 ##### 1) Criar uma vitrine, com duas colunas e utilizando os dados retornados da API
 - [x] Criar uma vitrine
 - [x] Executar search de 10 produtos 
-- [ ] Implementar scroll infinito
+- [x] Implementar scroll infinito
 - [x] Exibir imagens, preço de tabela, preço final, melhor opção de parcelamento e desconto
 - [x] Implementar busca por texto
 
