@@ -18,6 +18,7 @@ import butterknife.OnClick;
 import ca.leomoraes.fulllabstore.R;
 import ca.leomoraes.fulllabstore.adapter.ProductAdapter;
 import ca.leomoraes.fulllabstore.model.Product;
+import ca.leomoraes.fulllabstore.util.EndlessRecyclerViewScrollListener;
 import ca.leomoraes.fulllabstore.viewmodel.MainViewModel;
 
 public class MainActivity extends BaseActivity {
@@ -33,6 +34,7 @@ public class MainActivity extends BaseActivity {
 
     private MainViewModel viewModel;
     private ProductAdapter mAdapter;
+    private EndlessRecyclerViewScrollListener scrollListener;
 
     @Override
     int getLayoutResId() {
@@ -50,6 +52,18 @@ public class MainActivity extends BaseActivity {
         mRecycler.setLayoutManager(layoutManager);
         mAdapter = new ProductAdapter();
         mRecycler.setAdapter(mAdapter);
+
+        // Retain an instance so that you can call `resetState()` for fresh searches
+        scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount, RecyclerView view) {
+                // Triggered only when new data needs to be appended to the list
+                displayLoading();
+                viewModel.setPage();
+            }
+        };
+        // Adds the scroll listener to RecyclerView
+        mRecycler.addOnScrollListener(scrollListener);
     }
 
     @Override
